@@ -64,7 +64,7 @@ const  HomeScreen =()=>{
         matcheRender = <MatchList footballDataArray={matchData} />
       }
 
-      let conditionalElement = loading ? (<ActivityIndicator style={{marginTop: 20}} size={'large'} color='#5c65f1'/>) : matcheRender
+      let conditionalElement = loading ? (<ActivityIndicator style={{marginTop: 10, marginBottom: 20}} size={'large'} color='#5c65f1'/>) : matcheRender
       if(errorInternet.error || !errorInternet.internetConnected){
         
         conditionalElement = <ErrorComponent errorMessage={errorInternet} retryHandle={handleDispatch}/>

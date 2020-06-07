@@ -1,7 +1,8 @@
 import 'react-native-gesture-handler'
-import React from 'react';
+import React, {useEffect} from 'react';
 import NavigationWrapper from './navigator'
 import { NavigationContainer } from '@react-navigation/native'
+import SplashScreen from 'react-native-splash-screen'
 import HomeScreen from './screens/HomeScreen'
 import {
   SafeAreaView,
@@ -14,7 +15,11 @@ import {
 
 
 
+
 const App= () => {
+  useEffect(()=>{
+    SplashScreen.hide()
+  }, [])
   return (
    
         <NavigationContainer>

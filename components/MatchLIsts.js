@@ -11,6 +11,7 @@ export default MatchList =({footballDataArray, leagueScreen})=>{
             <FlatList
                 data={footballDataArray}
                 renderItem={({item}) => <MatchCard match={item} />}
+                keyExtractor={item => item.title}
             />
 
         </View>
