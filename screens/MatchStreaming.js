@@ -17,7 +17,6 @@ export default MatchStreaming =({navigation, route})=>{
     //split srcLink to get the https link to the api
     const apiHttpsLink = srcLink[1].split("'")[1]
     const momentTime = moment(date).format('lll')
-    console.log(apiHttpsLink)
 
     const Loading =()=>{
         return(
