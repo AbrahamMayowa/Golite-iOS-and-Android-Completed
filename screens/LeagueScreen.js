@@ -13,6 +13,8 @@ export default LeagueScreen =({route, navigation})=>{
     const [errorInternet, setErrorInternet] = useState({error: '', internetConnected: true})
   
     const {leagueCode} = route.params
+
+    let _isMounted = false;
   
     const handleDispatch = async ()=>{
         setLoading(true)
@@ -28,8 +30,11 @@ export default LeagueScreen =({route, navigation})=>{
                 const data = await res.json()
         
                 const updatedData = data.filter(match => match.competition.id.toString() === leagueCode)
-                setMatchData(updatedData)
-                setLoading(false)
+                if(_isMounted){
+                  setMatchData(updatedData)
+                  setLoading(false)
+                }
+            
             
             }catch(error){
                 setErrorInternet({error: error.message, internetConnected: true})
@@ -43,7 +48,9 @@ export default LeagueScreen =({route, navigation})=>{
   
   
     useEffect(()=>{
+      _isMounted = true
       handleDispatch()
+     return ()=> _isMounted = false
     }, [])
 
     let matcheRender;
@@ -53,9 +60,10 @@ export default LeagueScreen =({route, navigation})=>{
       matcheRender = <MatchList footballDataArray={matchData} leagueScreen={true}/>
     }
 
+    
     let conditionalElement = loading ? (<ActivityIndicator style={{marginTop: 20}} size={"large"} color='#5c65f1'/>) :  matcheRender
+    
     if(errorInternet.error || !errorInternet.internetConnected){
-      
       conditionalElement = <ErrorComponent errorMessage={errorInternet} retryHandle={handleDispatch}/>
     }
 
